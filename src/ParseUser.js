@@ -924,7 +924,7 @@ var DefaultController = {
       password: user.get('password')
     };
     return RESTController.request(
-      'GET', 'login', auth, options
+      'POST', 'login', auth, options
     ).then((response, status) => {
       user._migrateId(response.objectId);
       user._setExisted(true);
