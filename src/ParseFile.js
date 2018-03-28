@@ -245,7 +245,7 @@ class ParseFile {
 }
 
 var DefaultController = {
-  saveFile: function(name: string, source: FileSource) {
+  saveFile: function(name: string, source: FileSource, options?: { progress?: any }) {
     if (source.format !== 'file') {
       throw new Error('saveFile can only be used with File-type sources.');
     }
@@ -260,7 +260,7 @@ var DefaultController = {
       url += '/';
     }
     url += 'files/' + name;
-    return CoreManager.getRESTController().ajax('POST', url, source.file, headers);
+    return CoreManager.getRESTController().ajax('POST', url, source.file, headers, options);
   },
 
   saveBase64: function(name: string, source: FileSource, options?: { useMasterKey?: boolean, success?: any, error?: any }) {

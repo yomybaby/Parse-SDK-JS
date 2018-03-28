@@ -73,7 +73,9 @@ function ajaxIE9(method: string, url: string, data: any) {
 }
 
 const RESTController = {
-  ajax(method: string, url: string, data: any, headers?: any) {
+  ajax(method: string, url: string, data: any, headers?: any, options?: any) {
+    options = options || {};
+    
     if (useXDomainRequest) {
       return ajaxIE9(method, url, data, headers);
     }
@@ -89,7 +91,11 @@ const RESTController = {
       }
       var handled = false;
       var xhr = new XHR();
-
+      
+      if (options.progress){
+        xhr.upload.onprogress = options.progress;
+      }
+      
       xhr.onreadystatechange = function() {
         if (xhr.readyState !== 4 || handled) {
           return;
