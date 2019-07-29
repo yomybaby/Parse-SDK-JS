@@ -1,6 +1,6 @@
 coverage
-dist
-lib
+# dist
+# lib
 logs
 node_modules
 test_output
@@ -10,7 +10,7 @@ integration/test_logs
 .idea/
 integration/test_logs
 test_logs
-out/
-docs/
+# out/
+# docs/
 .eslintcache
 

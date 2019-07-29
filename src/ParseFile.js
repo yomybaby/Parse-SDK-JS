@@ -37,6 +37,15 @@ export type FileSource = {
   type: string
 };
 
+function isFileType(data: object): bool {
+  data = data || {};
+  if (process.env.PARSE_BUILD === 'react-native') {
+    return data.uri !== undefined;
+  } else {
+    return typeof File !== 'undefined' && data instanceof File;
+  }
+}
+
 const dataUriRegexp =
   /^data:([a-zA-Z]+\/[-a-zA-Z0-9+.]+)(;charset=[a-zA-Z0-9\-\/]*)?;base64,/;
 
@@ -112,7 +121,7 @@ class ParseFile {
           base64: this._data,
           type: specifiedType
         };
-      } else if (typeof Blob !== 'undefined' && data instanceof Blob) {
+      } else if (isFileType(data)) {
         this._source = {
           format: 'file',
           file: data,
