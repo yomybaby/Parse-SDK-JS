@@ -9,10 +9,4 @@
  * This is a simple wrapper to unify EventEmitter implementations across platforms.
  */
 
-if (process.env.PARSE_BUILD === 'react-native') {
-  const EventEmitter = require('EventEmitter');
-  EventEmitter.prototype.on = EventEmitter.prototype.addListener;
-  module.exports = EventEmitter;
-} else {
-  module.exports = require('events').EventEmitter;
-}
+module.exports = require('events').EventEmitter;
